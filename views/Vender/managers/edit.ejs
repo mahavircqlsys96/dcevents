@@ -1,0 +1,111 @@
+<%-include('../../Vender/partials/head')%>
+
+<div class="right_contant">
+    <div class="page_head">
+      <button type="button" class="back_btn" onclick="goback()"><i class="fa-solid fa-arrow-left"></i></button>
+      <h2 class="page_title">Add User</h2>
+    </div>
+    <div class="shadow_box card_height">
+      <div class="dark_card">
+        <form id="validate"  action="/user_update" method="POST" enctype="multipart/form-data">
+          <div class="row">
+           
+            <div class="col-md-6">
+              <label for="" class="form_label">First Name</label>
+              <div class="inputgroup">
+                <input type="text" id="first_names" name="first_name" maxlength="50" class="inputcontrol" placeholder="First Name" value="<%-user_view.first_name%>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="" class="form_label">Last Name</label>
+              <div class="inputgroup">
+                <input type="text" id="last_name" name="last_name" maxlength="50" class="inputcontrol" placeholder="Last Name" value="<%-user_view.last_name%>">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form_label" for="">Phone Number</label>
+              <div class="inputgroup">
+                <input type="text" id="phone" name="phone" maxlength="15" class="inputcontrol" placeholder="Phone Number" value="<%-user_view.phone%>">
+              </div>
+            </div>
+          </div>          
+  
+            <div class="col-12 pt-4">
+              <button class="theme_btn" style="max-width: 16.875rem;" type="submit">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- jQuery CDN -->
+  <script>
+      $(document).ready(function () {
+        //  alert("vikas")
+        $("#validate").validate({
+          rules: {
+            first_name: {
+              required: true,
+              minlength: 2
+            },
+            last_name: {
+              required: true,
+              minlength: 5
+            },
+            department_id: {
+              required: true,
+       
+            },
+            phone: {
+              required: true,
+              minlength: 5
+            },
+            email: {
+              required: true,
+              minlength: 5
+            },
+            password: {
+              required: true,
+              minlength: 5
+            },
+            confirm_password: {
+              required: true,
+              minlength: 5,
+              equalTo: "#password" // Adjusted the selector to match the field id 'password'
+            }
+          },
+          messages: {
+            first_name: {
+              required: "Please enter your first name",
+              minlength: "Your first name must consist of at least 2 characters"
+            },
+            last_name: {
+              required: "Please enter your last name",
+              minlength: "Your last name must consist of at least 5 characters"
+            },
+            department_id: {
+              required: "Please choose department",
+             
+            },
+            phone: {
+              required: "Please enter an phone",
+              minlength: "Your email must consist of at least 5 characters"
+            },
+            email: {
+              required: "Please enter an email address",
+              minlength: "Your email must consist of at least 5 characters"
+            },
+            password: {
+              required: "Please enter a password",
+              minlength: "Your password must consist of at least 5 characters"
+            },
+            confirm_password: {
+              required: "Please enter the password again",
+              minlength: "Your password must consist of at least 5 characters",
+              equalTo: "Please enter the same password as above"
+            }
+          }
+        });
+      });
+    </script>
+    

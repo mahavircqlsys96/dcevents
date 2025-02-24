@@ -1,0 +1,76 @@
+ 
+<section class="bg_blue p-3 blue_back">
+    <div class="bg-white rounded-3 up_main">
+      <div class="row h-100">
+        <div class="col-md left_borders h-100">
+          <section class="content_Area">
+            <div class="container bg-white rounded-4 h-100">
+              <div class="row align-items-center h-100">
+                <div class="col-md-12 h-100">
+                  <div class="p-4">
+                    <h5 class="mb-4 fs_18">Terms & Conditions</h5>
+  
+                    <form action="/terms" method="post" class="form-validate" novalidate="novalidate" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <label class="form-label" for="title">Title</label>
+                        <input type="text" class="form-control" placeholder="Title" value="<%= terms.title %>" name="title" id="title" readonly>
+                      </div>
+  
+                      <div class="mb-3">
+                        <label class="form-label" for="content">Content</label>
+                        <textarea class="form-control textcolor" name="content" id="summernote" placeholder="Privacy policy"><%= terms.content %></textarea>
+                      </div>
+  
+                      <div class="d-flex justify-content-between">
+                        <a href="/dashboard" class="btn btn-danger mb-3 btn_theme border-0 rounded-pill">
+                          <i class="ph-bold ph-caret-left"></i> Back
+                        </a>
+                        <button type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+                          Save Changes <i class="ph-bold ph-caret-right"></i>
+                        </button>
+                      </div>
+                    </form>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Include jQuery -->
+   
+  
+  <!-- Include Summernote CSS/JS -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      $('#summernote').summernote({
+        placeholder: 'Privacy policy',
+        tabsize: 2,
+        height: 300,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+  
+      $('form').on('submit', function(event) {
+        const summernoteContent = $('#summernote').summernote('code').trim();
+        if (!summernoteContent) {
+          alert('Content cannot be empty.');
+          event.preventDefault();
+        }
+      });
+    });
+  </script>
+  

@@ -1,0 +1,113 @@
+<section class="bg_blue p-3 blue_back">
+  <div class="bg-white rounded-3 up_main">
+    <section class="content_Area">
+      <div class="container bg-white rounded-4 h-100">
+        <div class="row h-100">
+
+          <!-- Event Details Section -->
+          <div class="col-md-6 left_borders h-100">
+            <h5 class="mb-4 upload fs_26">Event View</h5>
+            <div class="mx-auto">
+              <div class="">
+                <!-- Event Title -->
+                <div class="form-group mb-3 position-relative">
+                  <label for="title" class="form-label">Event Title</label>
+                  <input type="text" class="form-control" value="<%= event_data.title %>" disabled>
+                </div>
+
+                <!-- Event Description -->
+                <div class="form-group mb-3 position-relative">
+                  <label for="description" class="form-label">Event Description</label>
+                  <textarea class="form-control" rows="3" disabled><%= event_data.description %></textarea>
+                </div>
+
+                <!-- Event Date and Time -->
+                <div class="form-group mb-3 position-relative">
+                  <label for="datetime" class="form-label">Date & Time</label>
+                  <input type="text" class="form-control" value="<%= moment(event_data.date).format('DD-MM-YYYY') %> at <%= moment(event_data.time, 'HH:mm').format('hh:mm A') %>" disabled>
+                </div>
+
+                <div class="form-group mb-3 position-relative">
+                  <label for="title" class="form-label">Restaurants</label>
+              
+                  <input type="text" name="venue_name" id="venue_name" class="form-control" value="<%= event_data.venue_name %>" placeholder="Restaurants">
+                </div>
+
+                <!-- Event Price -->
+                <div class="form-group mb-3 position-relative">
+                  <label for="price" class="form-label">Address</label>
+                  <input type="text" class="form-control" value="<%= event_data.address %>" disabled>
+                </div>
+              </div>
+            </div>
+                <!-- Tickets Section -->
+              <div class="tickets mt-4">
+                <h4 class="fs-6 fw-bold">Ticket Information</h4>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Ticket Type</th>
+                      <th scope="col">Number of Tickets</th>
+                      <th scope="col">Amount (€)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% event_data.ticket_data.forEach(function(ticket) { %>
+                      <tr>
+                        <td>
+                          <%= ticket.type == 0 ? 'Normal' : ticket.type == 1 ? 'VIP' : 'VVIP' %>
+                        </td>
+                        <td><%= ticket.no_of_tickets %></td>
+                        <td>€ <%= ticket.amount %></td>
+                      </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+
+          <!-- Images and Tickets Section -->
+          <div class="col-md-6">
+            <div class="add_images mb-2 rounded-5 py-4">
+              <h3 class="fs-6 fw-bold text-black">Event Images</h3>
+
+              <!-- Image Slider (Bootstrap or custom slider) -->
+              <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <% event_data.event_images.forEach(function(image, index) { %>
+                    <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                      <img src="<%= image.image %>" class="d-block w-100 rounded" alt="Event Image">
+                    </div>
+                  <% }) %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
+          
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Back Button -->
+      <section class="back">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+          <div class="text-center">
+            <a href="/events_list" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+              <i class="ph-bold ph-caret-left"></i> Back
+            </a>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>

@@ -1,0 +1,211 @@
+<%-include('../../Vender/partials/head')%>
+<section class="bg_blue p-3 blue_back">
+  <div class="bg-white rounded-3 up_main">
+    <div class="row h-100">
+      <div class="col-md-6 left_borders h-100">
+        <section class="content_Area">
+          <div class="container bg-white rounded-4 h-100">
+            <div class="row align-items-center h-100">
+              <div class="col-md-12 h-100">
+                <div class="p-4">
+                  <h5 class="mb-4 fs_18">We Need Following Details</h5>
+
+                  <form id="validate" id="phoneForm" action="/manager_save" method="POST" class="mb-2 rounded-5 signup_form py-4" enctype="multipart/form-data">
+                    <div class="form-group mb-3 position-relative">
+                      <label for="first_name">First Name</label>
+                      <input type="text" class="form-control" id="first_name" maxlength="50" name="first_name" placeholder="Enter First Name">
+
+                    </div>
+
+                    <div class="form-group mb-3 position-relative">
+                      <label for="last_name">Last Name</label>
+                      <input type="text" class="form-control" id="last_name" maxlength="50" name="last_name" placeholder="Enter Last Name">
+                    </div>
+
+                    <div class="form-group mb-3 position-relative mobile_number_code">
+                      <label for="phone">Phone Number:</label>
+                      <input type="hidden" id="countrycode" name="country_code">
+                      <input type="tel" class="form-control" id="phone" name="phoneNo" maxlength="15" placeholder="Enter Phone Number">
+                      <label id="exampleInputName2-error" class="error" for="exampleInputName2"></label>
+                    </div>
+
+                    <div class="profile-upload mb-4">
+                      <img src="../assets/images/profile1.png" alt="Profile Image" class="rounded-circle" id="profileImage" style="width: 100px; height: 100px;">
+                      <div class="up_plus" id="plus_icon">
+                        <label for="image" class="cursor-pointer">
+                          <img src="../assets/images/plus.png" alt="Upload Icon" class="plus-icon">
+                        </label>
+                        <input type="file" accept="image/*" name="image" id="image" style="display: none;" onchange="loadFile(event)">
+                      </div>
+                    </div>
+                    <h5 class="mb-4 upload fs_18">Upload Profile Image</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="col-md-6 h-100">
+        <div class="p-3">
+          <h5 class="mb-4 fs_18">Login Details</h5>
+          <div class="add_images mb-2 rounded-5 upload_images py-4">
+            <h3 class="fs-6 fw-bold text-black d-flex justify-content-between">Add Password <span> For Vender App Login</span></h3>
+            <div class="mb-3 position-relative">
+              <label for="phone">Email</label>
+              <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Email" autocomplete="nope" value="">
+              <img src="./../assets/images/eye.png" alt="" class="ico_last position-absolute">
+            </div>
+            <div class="mb-3 position-relative">
+              <label for="phone">Password</label>
+              <img src="./../assets/images/key.png" alt="" class="ico_front position-absolute">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off" value="">
+              <img src="./../assets/images/eye.png" alt="" class="ico_last position-absolute">
+            </div>
+            <div class="mb-3 position-relative">
+              <label for="phone">Confirm Password</label>
+              <img src="./../assets/images/key.png" alt="" class="ico_front position-absolute">
+              <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+              <img src="./../assets/images/eye.png" alt="" class="ico_last position-absolute">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="back">
+      <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="text-center">
+          <button type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+            Add Manager <i class="ph-bold ph-caret-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    </form>
+    <section class="back">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-between page_footer">
+          <a href="/manager_list" class="fs_20 d-flex align-items-center gap-2 fw-bold">
+            <i class="ph-bold ph-caret-left"></i> Back
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function loadFile(event) {
+      const profilePreview = document.getElementById('profileImage');
+      profilePreview.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
+  <script>
+    $(document).ready(function() {
+      $("#validate").validate({
+        rules: {
+
+          first_name: {
+            required: true,
+            minlength: 3
+          },
+          last_name: {
+            required: true,
+            minlength: 3
+          },
+          phone: {
+            required: true,
+            minlength: 10
+          },
+          email: {
+            required: true,
+            minlength: 3
+          },
+          image: {
+            required: true,
+            accept: "image/*"
+          },
+          password: {
+            required: true,
+            minlength: 5
+          },
+          confirm_password: {
+            required: true,
+            minlength: 5,
+            equalTo: "#password" // Adjusted the selector to match the field id 'password'
+          }
+        },
+        messages: {
+          first_name: {
+            required: "Please enter manager  first name",
+
+          },
+          last_name: {
+            required: "Please enter manager last name",
+
+          },
+          phone: {
+            required: "Please enter your phone number",
+            minlength: "Your phone number must consist of at least 10 digits"
+          },
+          image: {
+            required: "Please upload an image",
+            accept: "Only image files are allowed (png, jpg, jpeg, gif, bmp)"
+          },
+          email: {
+            required: "Please enter an email address",
+            minlength: "Your email must consist of at least 5 characters"
+          },
+          password: {
+            required: "Please enter a password",
+            minlength: "Your password must consist of at least 5 characters"
+          },
+          confirm_password: {
+            required: "Please enter the password again",
+            minlength: "Your password must consist of at least 5 characters",
+            equalTo: "Please enter the same password as above"
+          }
+        }
+      });
+    });
+  </script>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script>
+  const phoneInput = document.querySelector("#phone");
+  const countryCodeInput = document.querySelector("#countrycode");
+
+  // Initialize intl-tel-input
+  const iti = window.intlTelInput(phoneInput, {
+    initialCountry: "auto",
+    geoIpLookup: function(callback) {
+      fetch("https://ipinfo.io?token=YOUR_TOKEN_HERE") // Optional for auto-detecting country
+        .then((resp) => resp.json())
+        .then((data) => callback(data.country))
+        .catch(() => callback("us"));
+    },
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+  });
+
+  // Update country code whenever the phone input changes
+  phoneInput.addEventListener('input', () => {
+    countryCodeInput.value = iti.getSelectedCountryData().dialCode;
+    console.log("Country Code:", countryCodeInput.value);
+    console.log("Phone Number:", phoneInput.value);
+  });
+
+  // Alternatively, listen to country change (e.g., when the user selects a different country)
+  phoneInput.addEventListener('countrychange', () => {
+    countryCodeInput.value = iti.getSelectedCountryData().dialCode;
+    console.log("Country Code (on country change):", countryCodeInput.value);
+  });
+
+  document.querySelector("#phoneForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent form submission
+    console.log("Form submitted - Country Code:", countryCodeInput.value);
+    console.log("Form submitted - Phone Number:", phoneInput.value);
+  });
+</script>

@@ -1,0 +1,33 @@
+<div class="">
+  <form action="" method="POST" class="mb-2 rounded-5 profile_form" enctype="multipart/form-data">
+    <h5 class="fs_20 fw-bold text-black mb-5">Event Category View</h5>
+
+    <div class="mx-auto">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3 position-relative">
+            <label for="bio" class="form-label">Event Category</label>
+            <input type="text" disabled class="form-control" maxlength="50" id="title" name="title" placeholder="Username" value="<%-eventcateview.title%>">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group mb-3 position-relative">
+            <label for="status" class="form-label">Status</label>
+            <input type="text" disabled class="form-control" disabled maxlength="50" id="status" name="status" value="<%= eventcateview.status == 1 ? 'Active' : eventcateview.status == 0 ? 'Inactive' : 'Unknown' %>">
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4">
+          <div class="d-flex page_footer">
+            <a href="/event_categories_list" type="submit" class="btn_theme rounded-pill fs_20 text-white border-0 d-flex justify-content-between px-5 align-items-center">
+              Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- profile end -->

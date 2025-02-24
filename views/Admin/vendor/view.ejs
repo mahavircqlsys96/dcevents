@@ -1,0 +1,79 @@
+<%-include('../../Admin/partials/head')%>
+<!-- profile start -->
+
+<div class="">
+  <form action="" method="POST" class="mb-2 rounded-5 profile_form" enctype="multipart/form-data">
+    <h5 class="fs_20 fw-bold text-black mb-5">Vendor View</h5>
+    <div class="profile-upload mb-4">
+      <img src="<%-userview.image%>" alt="Profile Image" class="rounded-circle" id="profilePreview" style="width: 100px; height: 100px;">
+      <div class="up_plus" id="plus_icon">
+        <!-- <input type="file" accept="image/*" name="image" id="image" style="display: none;" onchange="loadFile(event)"> -->
+      </div>
+    </div>
+    <div class="mx-auto">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group mb-3 position-relative">
+            <label for="bio" class="form-label">First Name</label>
+            <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+            <input type="text" disabled class="form-control" maxlength="50" id="first_name" name="first_name" placeholder="Username" value="<%-userview.first_name%>">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3 position-relative">
+            <label for="bio" class="form-label">Last Name</label>
+            <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+            <input type="text" disabled class="form-control" maxlength="50" id="last_name" name="last_name" placeholder="last_name" value="<%-userview.last_name%>">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group mb-3 position-relative">
+            <label for="bio" class="form-label">Email</label>
+            <img src="./../assets/images/sms.png" alt="" class="ico_front position-absolute">
+            <input type="email" disabled class="form-control" readonly id="email" name="email" placeholder="Email" value="<%-userview.email%>">
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="form-group mb-3 position-relative">
+            <label for="gender" class="form-label">Gender</label>
+            <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+            <input type="text" disabled class="form-control" disabled maxlength="50" id="gender" name="gender" value="<%=
+                userview.gender == 0 ? 'N/A' :
+                userview.gender == 1 ? 'Male' :
+                userview.gender == 2 ? 'Female' :
+                userview.gender == 3 ? 'Others' : 'Unknown'
+             %>">
+          </div>
+        </div>
+
+
+        <div class="col-md-12">
+          <div class="form-group mb-3 position-relative mobile_number_code">
+            <label for="bio" class="form-label">Phone Number</label>
+            <span class="codes"> +91 <i class="ph-bold ph-caret-down"></i></span>
+            <input type="text" disabled class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="15" id="phone" name="phone" placeholder="Enter Number" value="<%-userview.phone%>">
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group  mb-3 position-relative your bio">
+            <label for="bio" class="form-label">Enter your Bio</label>
+            <textarea id="bio" disabled class="form-control p-3" name="bio" rows="3" placeholder="General Details"><%-userview.bio%></textarea>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4">
+          <div class="d-flex page_footer">
+            <a href="/vendor_list" type="submit" class="btn_theme rounded-pill fs_20 text-white border-0 d-flex justify-content-between px-5 align-items-center">
+              Back
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- profile end -->

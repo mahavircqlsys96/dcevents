@@ -1,0 +1,236 @@
+<section class="content_Area">
+  <div class="container bg-white rounded-4 h-100">
+    <div class="row h-100">
+      <div class="col-md-8 left_borders h-100">
+        <!-- Start of the form, all inputs within this form -->
+        <form action="/events_save" method="POST" class="mb-2 rounded-5 signup_form py-4" enctype="multipart/form-data">
+          <h5 class="mb-4 upload fs_26">Create a new event</h5>
+          <div class="mx-auto">
+            <div class="form-group mb-3 position-relative">
+              <label for="title" class="form-label">Event Title</label>
+              <input type="text" name="title" id="title" class="form-control" placeholder="Title">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="event_type" class="form-label">Event Type</label>
+              <img src="../assets/images/arrow-down.png" alt="" class="ico_last position-absolute">
+              <!-- <select name="event_type" id="event_type" class="form-control">
+                <option value="0">Select</option>
+                <option value="1">Select 1</option>
+                <option value="2">Select 2</option>
+              </select> -->
+              <select name="event_category_id" id="event_category_id" class="form-control">
+                <option value=""> Select</option>
+                <% get_events_categories.forEach(function(category) { %>
+                <option value="<%= category.id %>"><%= category.title %></option>
+                <% }); %>
+              </select>
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="date" class="form-label">Select date</label>
+              <input type="date" class="form-control" id="date" name="date" placeholder="Select">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="time" class="form-label">Select Time</label>
+              <input type="time" name="time" class="form-control" id="time" placeholder="Select">
+            </div>
+            <div class="form-group mb-3 position-relative">
+              <label for="description" class="form-label">Event Description</label>
+              <textarea id="description" name="description" class="form-control" style="height: 100px;"  placeholder="Add Description"></textarea>
+            </div>
+            <div class="form-group mb-3 position-relative">
+              <label for="title" class="form-label">Restaurants</label>
+          
+              <input type="text" name="venue_name" id="venue_name" class="form-control" value="" placeholder="Restaurants">
+            </div>
+
+            <div class="form-group mb-3 position-relative" data-coreui-toggle="modal" data-coreui-target="#">
+              <label for="address" class="form-label">Address</label>
+              <img src="../assets/images/location.png" alt="" class="ico_front position-absolute">
+              <input type="text" class="form-control ps-5" id="address" name="address" placeholder="Enter address ...">
+              <!-- <input type="hidden" id="latitude" name="latitude" value="0">
+              <input type="hidden" id="longitude" name="longitude" value="0"> -->
+              <i class="ph-light ph-caret-right fs_30 ico_last position-absolute"></i>
+            </div>
+             <div class="form-group mb-3 position-relative">
+               <label for="phone" class="form-label">Latitude</label>
+               <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="15" id="latitude" name="latitude" placeholder="Enter latitude Ex:30.707600 (Note:- Google Places Keys Pending)">
+             </div>
+              <div class="form-group mb-3 position-relative">
+                <label for="phone" class="form-label">Longitude</label>
+                <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="15" id="longitude" name="longitude" placeholder="Enter longitude Ex:76.715126 (Note:- Google Places Keys Pending)">
+              </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="15" id="phone" name="phone" placeholder="Enter Number">
+            </div>
+            <div class="form-group mb-3 position-relative">
+              <section class="ticket-section">
+                <div class="container bg-white rounded-4">
+                  <h5 class="mb-4 ">Tickets</h5>
+                  <div class="row">
+                    <table class="table col-md-6 form-group mb-3 position-relative">
+                      <thead>
+                        <tr>
+                          <th>Ticket Type</th>
+                          <th>No. of Tickets</th>
+                          <th>Amount per Ticket (in $)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>General</td>
+
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="3" class="form-control" name="general" placeholder="No. of Tickets" /></td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" class="form-control" name="general_amount" placeholder="Amount" /></td>
+                        </tr>
+                        <tr>
+                          <td>VIP</td>
+
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="3" class="form-control" name="vip" placeholder="No. of Tickets" /></td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" class="form-control" name="vip_amount" placeholder="Amount" /></td>
+                        </tr>
+                        <tr>
+                          <td>VVIP</td>
+
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="3"  class="form-control" name="vvip" placeholder="No. of Tickets" /></td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11"  class="form-control" name="vvip_amount" placeholder="Amount" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+            </div>
+           
+
+            <!-- Image Upload Section -->
+          </div>
+          <br>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group mb-3">
+          <h3 class="fs-6 fw-bold text-black d-flex justify-content-between">Add Images <span> 1/5</span></h3>
+          <br>
+          <fieldset class="upload_dropZone text-center mb-3 p-4">
+            <legend class="visually-hidden">Image uploader</legend>
+            <img src="../assets/images/gallery.png" alt="">
+            <p class="small my-2 text-black w-75 mx-auto fw-semibold fs_18 my-4">Drag and drop Product Images here or use below button to upload</p>
+            <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" name="image" type="file" multiple accept="image/jpeg, image/png, image/svg+xml" onchange="validateFileLimit(this)" />
+            <label style="padding: 13px 50px;" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill" for="upload_image_background">Upload</label>
+            <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+          </fieldset>
+        </div>
+      </div>
+
+      <section class="back">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+          <div class="text-center">
+            <button type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+              Add Event
+              <i class="ph-bold ph-caret-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </section>
+      </form>
+      <!-- End of the form -->
+    </div>
+  </div>
+  </div>
+</section>
+<script>
+  $(document).ready(function() {
+    // Custom method to validate file types
+    $.validator.addMethod("accept", function(value, element, param) {
+      return this.optional(element) || (element.files.length && element.files[0].type.match(param));
+    }, "Please upload a valid image file (jpg, jpeg, png).");
+
+    // Form validation rules and messages
+    $("form").validate({
+      rules: {
+        title: {
+          required: true,
+          minlength: 2
+        },
+        event_type: {
+          required: true
+        },
+        date: {
+          required: true,
+        },
+        time: {
+          required: true,
+        },
+        description: {
+          required: true,
+          minlength: 5
+        },
+        address: {
+          required: true
+        },
+        phone: {
+          required: true,
+          minlength: 10,
+          maxlength: 15,
+          digits: true // Only digits are allowed
+        },
+        image: {
+          required: true,
+          accept: "image/*" // Accepts only image files
+        }
+      },
+      messages: {
+        title: {
+          required: "Please enter the event title",
+          minlength: "The event title must be at least 2 characters long"
+        },
+        event_type: {
+          required: "Please select an event type"
+        },
+        date: {
+          required: "Please select a date for the event"
+        },
+        time: {
+          required: "Please select a time for the event"
+        },
+        description: {
+          required: "Please enter a description for the event",
+          minlength: "The description must be at least 5 characters long"
+        },
+        address: {
+          required: "Please enter the event address"
+        },
+        phone: {
+          required: "Please enter a phone number",
+          minlength: "Phone number must be at least 10 digits long",
+          maxlength: "Phone number must not exceed 15 digits",
+          digits: "Please enter a valid phone number (digits only)"
+        },
+        image: {
+          required: "Please upload an image for the event",
+          accept: "Only image files (jpg, jpeg, png) are allowed"
+        }
+      },
+      errorPlacement: function(error, element) {
+        if (element.attr("name") === "image") {
+          error.insertAfter(".upload_gallery"); // Place the error after the image upload section
+        } else {
+          error.insertAfter(element); // Default placement
+        }
+      }
+    });
+  });
+
+  function validateFileLimit(input) {
+    const maxFiles = 5;
+    if (input.files.length > maxFiles) {
+      alert('You can only upload a maximum of ' + maxFiles + ' files');
+      input.value = ''; // Clear the input to allow new selection
+    }
+  }
+</script>

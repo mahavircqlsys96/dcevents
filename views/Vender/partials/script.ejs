@@ -1,0 +1,415 @@
+
+<!-- payment Modal -->
+<div class="modal fade right_modal" id="payment_cards" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-right">
+      <div class="modal-content h-100 animate-slide p-4">
+          <!-- <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button> -->
+          <div class="modal-header border-0 d-flex flex-column text-start align-items-start gap-3">
+              <h5 class="modal-title" id="exampleModalLabel">Select Address</h5>
+              <form action="./../dashboard/index.php" class="mb-2 rounded-5 signup_form py-4 m-0 w-100">
+                  <div class="profile-upload mb-4">
+                      <img src="../assets/images/card.png" alt="Profile Image" class="rounded-circle" id="profilePreview">
+                  </div>
+                  <div class="mx-auto">
+                      <div class=" ">
+                          <div class="form-group mb-3 position-relative pay_Card">
+                              <label for="bio fs_14">Pay by bank card</label>
+                              <img src="../assets/images/Card-Flags.png" alt="" class="ico_front position-absolute">
+                              <input type="text" class="form-control" id="" placeholder="Card number">
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <input type="text" class="form-control" id="" placeholder="MM/YY">
+                              </div>
+                              <div class="col-md-6">
+                                  <input type="text" class="form-control" id="" placeholder="CVC">
+                              </div>
+                          </div>
+                          <div class="mt-3">
+                              <div class="d-flex align-items-center">
+                                  <div class="form-check form-switch">
+                                      <input class="form-check-input" type="checkbox" id="toggleSwitch">
+                                      <label class="form-check-label fs_18" for="toggleSwitch">Remember My Card</label>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="mt-3">
+                              <p class="mb-2 fs_14 opacity-50">Or Link other Accounts</p>
+                              <div class="d-flex gap-3">
+                                  <div class="payment-button">
+                                      <img src="../assets/images/apple.png" alt="apple pay logo">
+                                  </div>
+                                  <!-- <<<<<<<<<<Stripe button>>>> -->
+                                  <div class="payment-button text-primary">
+                                      <img src="../assets/images/stripe.png" alt="apple pay logo">
+                                  </div>
+                                  <!-- <<<<<< google pay button>>> -->
+                                  <div class="payment-button">
+                                      <img src="../assets/images/g pay.png" alt="apple pay logo">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+
+          <div class="modal-body">
+
+          </div>
+
+          <div class="modal-footer d-flex flex-column border-0">
+              <a href="signup2.php" class="btn_theme rounded-pill fs_18 text-white border-0 d-flex px-4 align-items-center w-100 justify-content-around"> Save </a>
+              <button type="button" data-coreui-dismiss="modal" class="w-100 bg-transparent text-black fw-semibold fs_18 border-0">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Location Modal -->
+<div class="modal fade right_modal" id="location_Set" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-right">
+      <div class="modal-content h-100 animate-slide p-4">
+          <!-- <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button> -->
+          <div class="modal-header border-0 d-flex flex-column text-start align-items-start gap-3">
+              <h5 class="modal-title" id="exampleModalLabel">Select Address</h5>
+              <form action="" class="w-100">
+                  <div class="form-group mb-3 position-relative">
+                      <img src="../assets/images/location.png" alt="" class="ico_front  position-absolute">
+                      <input type="text" class="form-control ps-5" id="" placeholder="" value="15 rue marshal 89 Katherine Street....">
+                  </div>
+                  <div class="form-group mb-3 position-relative rounded-4 border-1 overflow-hidden">
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12618.963790741076!2d-122.45658274100894!3d37.74922122064761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2sin!4v1737972915283!5m2!1sen!2sin" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  </div>
+              </form>
+          </div>
+
+          <div class="modal-body">
+
+          </div>
+
+          <div class="modal-footer d-flex flex-column border-0">
+              <a href="signup2.php" class="btn_theme rounded-pill fs_18 text-white border-0 d-flex px-4 align-items-center w-100 justify-content-around"> Save </a>
+              <button type="button" data-coreui-dismiss="modal" class="w-100 bg-transparent text-black fw-semibold fs_18 border-0">Cancel</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- coreUI bootstrap js files -->
+<script src="../../assets/js/popper.min.js"></script>
+<script src="../../assets/js/coreui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+<script>
+  /* Bootstrap 5 JS included */
+
+  console.clear();
+  ('use strict');
+
+  (function() {
+
+      'use strict';
+
+      // Four objects of interest: drop zones, input elements, gallery elements, and the files.
+      // dataRefs = {files: [image files], input: element ref, gallery: element ref}
+
+      const preventDefaults = event => {
+          event.preventDefault();
+          event.stopPropagation();
+      };
+
+      const highlight = event =>
+          event.target.classList.add('highlight');
+
+      const unhighlight = event =>
+          event.target.classList.remove('highlight');
+
+      const getInputAndGalleryRefs = element => {
+          const zone = element.closest('.upload_dropZone') || false;
+          const gallery = zone.querySelector('.upload_gallery') || false;
+          const input = zone.querySelector('input[type="file"]') || false;
+          return {
+              input: input,
+              gallery: gallery
+          };
+      }
+
+      const handleDrop = event => {
+          const dataRefs = getInputAndGalleryRefs(event.target);
+          dataRefs.files = event.dataTransfer.files;
+          handleFiles(dataRefs);
+      }
+
+
+      const eventHandlers = zone => {
+
+          const dataRefs = getInputAndGalleryRefs(zone);
+
+          if (!dataRefs.input) return;
+
+          // Prevent default drag behaviors
+          ;
+          ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(event => {
+              zone.addEventListener(event, preventDefaults, false);
+              document.body.addEventListener(event, preventDefaults, false);
+          });
+
+          // Highlighting drop area when item is dragged over it
+          ;
+          ['dragenter', 'dragover'].forEach(event => {
+              zone.addEventListener(event, highlight, false);
+          });;
+          ['dragleave', 'drop'].forEach(event => {
+              zone.addEventListener(event, unhighlight, false);
+          });
+
+          // Handle dropped files
+          zone.addEventListener('drop', handleDrop, false);
+
+          // Handle browse selected files
+          dataRefs.input.addEventListener('change', event => {
+              dataRefs.files = event.target.files;
+              handleFiles(dataRefs);
+          }, false);
+
+      }
+      // Initialise ALL dropzones
+      const dropZones = document.querySelectorAll('.upload_dropZone');
+      for (const zone of dropZones) {
+          eventHandlers(zone);
+      }
+
+
+      // No 'image/gif' or PDF or webp allowed here, but it's up to your use case.
+      // Double checks the input "accept" attribute
+      const isImageFile = file => ['image/jpeg', 'image/png', 'image/svg+xml'].includes(file.type);
+
+
+      function previewFiles(dataRefs) {
+          if (!dataRefs.gallery) return;
+          for (const file of dataRefs.files) {
+              let reader = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = function() {
+                  let img = document.createElement('img');
+                  img.className = 'upload_img mt-2';
+                  img.setAttribute('alt', file.name);
+                  img.src = reader.result;
+                  dataRefs.gallery.appendChild(img);
+              }
+          }
+      }
+
+      const imageUpload = dataRefs => {
+
+          // Multiple source routes, so double check validity
+          if (!dataRefs.files || !dataRefs.input) return;
+
+          const url = dataRefs.input.getAttribute('data-post-url');
+          if (!url) return;
+
+          const name = dataRefs.input.getAttribute('data-post-name');
+          if (!name) return;
+
+          const formData = new FormData();
+          formData.append(name, dataRefs.files);
+
+          fetch(url, {
+                  method: 'POST',
+                  body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                  console.log('posted: ', data);
+                  if (data.success === true) {
+                      previewFiles(dataRefs);
+                  } else {
+                      console.log('URL: ', url, '  name: ', name)
+                  }
+              })
+              .catch(error => {
+                  console.error('errored: ', error);
+              });
+      }
+      // Handle both selected and dropped files
+      const handleFiles = dataRefs => {
+
+          let files = [...dataRefs.files];
+
+          // Remove unaccepted file types
+          files = files.filter(item => {
+              if (!isImageFile(item)) {
+                  console.log('Not an image, ', item.type);
+              }
+              return isImageFile(item) ? item : null;
+          });
+
+          if (!files.length) return;
+          dataRefs.files = files;
+
+          previewFiles(dataRefs);
+          imageUpload(dataRefs);
+      }
+
+  })();
+</script>
+
+<script>
+  var options = {
+      chart: {
+          type: 'bar'
+      },
+      series: [{
+          name: 'sales',
+          data: [30, 40, 45, 50, 0, 0]
+      }],
+      xaxis: {
+          categories: [11, 12, 1, 2, 3, 4]
+      },
+      colors: ['#ffcd00'] // Change this to any color you prefer
+  }
+
+  var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+  chart.render();
+</script>
+<script>
+  var options = {
+      chart: {
+          height: 350,
+          type: "line",
+          stacked: false
+      },
+      dataLabels: {
+          enabled: false
+      },
+      colors: ["#FF1654", "#247BA0"],
+      series: [{
+              name: "Series A",
+              data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+          },
+
+      ],
+      stroke: {
+          width: [4, 4]
+      },
+      plotOptions: {
+          bar: {
+              columnWidth: "20%"
+          }
+      },
+      xaxis: {
+          categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+      },
+      yaxis: [{
+              axisTicks: {
+                  show: true
+              },
+              axisBorder: {
+                  show: true,
+                  color: "#FF1654"
+              },
+              labels: {
+                  style: {
+                      colors: "#FF1654"
+                  }
+              },
+              title: {
+                  text: "Series A",
+                  style: {
+                      color: "#FF1654"
+                  }
+              }
+          },
+          {
+              opposite: true,
+              axisTicks: {
+                  show: true
+              },
+              axisBorder: {
+                  show: true,
+                  color: "#247BA0"
+              },
+              labels: {
+                  style: {
+                      colors: "#247BA0"
+                  }
+              },
+              title: {
+                  text: "Series B",
+                  style: {
+                      color: "#247BA0"
+                  }
+              }
+          }
+      ],
+      tooltip: {
+          shared: false,
+          intersect: true,
+          x: {
+              show: false
+          }
+      },
+      legend: {
+          horizontalAlign: "left",
+          offsetX: 40
+      }
+  };
+
+  var chart = new ApexCharts(document.querySelector("#chart_line"), options);
+
+  chart.render();
+</script>
+<script>
+function menuClose() {
+
+    var mcvar = document.getElementById("body");
+    mcvar.classList.toggle("close_menu");
+}
+</script>
+
+        <script>
+          const debounce = (func, wait) => {
+              let timeout;
+              return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+              };
+            };
+                const searchTable = () => {
+              const searchValue = document.getElementById('searchInput').value.toLowerCase();
+              const tableRows = document.querySelectorAll('.data_table tbody tr');
+              let noDataFound = true;
+          
+              tableRows.forEach(row => {
+                const rowText = row.innerText.toLowerCase();
+                if (rowText.includes(searchValue)) {
+                  row.style.display = '';
+                  noDataFound = false;
+                } else {
+                  row.style.display = 'none';
+                }
+              });
+          
+              let noDataRow = document.getElementById('no-data-row');
+              if (noDataFound) {
+                if (!noDataRow) {
+                  noDataRow = document.createElement('tr');
+                  noDataRow.id = 'no-data-row';
+                  noDataRow.innerHTML = '<td colspan="8" style="text-align: center;">No data found</td>';
+                  document.querySelector('.data_table tbody').appendChild(noDataRow);
+                }
+              } else {
+                if (noDataRow) noDataRow.remove();
+              }
+            };
+          
+            document.getElementById('searchInput').addEventListener('keyup', debounce(searchTable, 300));
+          </script>
+
+

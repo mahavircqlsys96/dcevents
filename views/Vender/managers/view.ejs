@@ -1,0 +1,48 @@
+<div class="right_contant">
+    <div class="page_head">
+        <button type="button" class="back_btn" onclick="goback()"><i class="fa-solid fa-arrow-left"></i></button>
+        <h2 class="page_title">User Profile</h2>
+    </div>
+    <div class="shadow_box card_height">
+        <div class="dark_card">
+            <form action="">
+                <div class="row">
+                  
+                    <div class="col-md-6">
+                        <label for="" class="form_label">First Name</label>
+                        <div class="inputgroup">
+                            <input type="text" readonly value="<%-userview.first_name%>" class="inputcontrol">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="" class="form_label">Last Name</label>
+                        <div class="inputgroup">
+                            <input type="text" class="inputcontrol" readonly value="<%-userview.last_name%>" >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form_label" for="">Phone Number</label>
+                        <div class="inputgroup">
+                          
+                            <input type="text"  class="inputcontrol" readonly value="<%-userview.phone%>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="" class="form_label">Email</label>
+                        <div class="inputgroup">
+                            <input type="email" class="inputcontrol"  readonly value="<%-userview.email%>">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form_label" for="">Assign Department</label>
+                    <div class="inputgroup">
+                      <input type="text" class="inputcontrol" readonly value="<%- userview && userview.departmentName && userview.departmentName.title ? userview.departmentName.title : '' %>">
+                    </div>
+                  </div>
+                  
+                
+            </form>
+        </div>
+    </div>
+</div>

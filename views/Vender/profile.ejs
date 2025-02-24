@@ -1,0 +1,299 @@
+<section class="content_Area px-0">
+    <div class="container-fluid bg-white rounded-4 h-100">
+        <div class="row mb-4">
+            <div class="col-md-3 px-0 py-5">
+                <h5 class="fs_20 fw-bold text-black mb-5 ps-5">Settings</h5>
+                <div class="card-product fs_16">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li class="product_account fw-bold text_theme">
+                            <a href="javascript:void(0);" class="active" onclick="openTab('profile')">
+                                <img src="../assets/images/product_profile.png" alt="">
+                                <span>Account</span>
+                            </a>
+                        </li>
+                        <li class="product_account fw-bold text_theme">
+                            <a href="javascript:void(0);" onclick="openTab('payment')">
+                                <img src="../assets/images/product_card.png" alt="">
+                                <span> Add Stripe Account</span>
+                            </a>
+                        </li>
+                        <li class="product_account fw-bold text_theme">
+                            <a href="javascript:void(0);" onclick="openTab('password')">
+                                <img src="../assets/images/product_lock.png" alt="">
+                                <span>Change password</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+          <!-- Tab Content -->
+ <!-- profile start -->
+<div id="profile" class="tab-content col-md-9  right_borders h-100 py-5">
+    <div class="">
+
+        <form action="/edit_profile" method="POST" class="mb-2 rounded-5 profile_form" enctype="multipart/form-data">
+            <h5 class="fs_20 fw-bold text-black mb-5">Edit Profile</h5>
+            <div class="profile-upload mb-4">
+                <img src="<%-profile.image%>" alt="Profile Image" class="rounded-circle" id="profilePreview"  style="width: 100px; height: 100px;">
+                <div class="up_plus" id="plus_icon">
+                    <input type="file" accept="image/*" name="image" id="image" style="display: none;" onchange="loadFile(event)">
+                    <img src="../assets/images/plus.png" alt="Profile Image" class="">
+                </div>
+
+            </div>
+                        <div class="mx-auto">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3 position-relative">
+                            <label for="bio" class="form-label">Username</label>
+                            <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+                            <input type="text" class="form-control" maxlength="50" id="user_name" name="user_name" placeholder="Username" value="<%-profile.user_name%>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3 position-relative">
+                            <label for="bio" class="form-label">Full Name</label>
+                            <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+                            <input type="text" class="form-control" maxlength="50"  id="name" name="name" placeholder="Name" value="<%-profile.first_name%>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3 position-relative">
+                            <label for="bio" class="form-label">Email</label>
+                            <img src="./../assets/images/sms.png" alt="" class="ico_front position-absolute">
+                            <input type="email" class="form-control" readonly id="email" name="email" placeholder="Email" value="<%-profile.email%>">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3 position-relative">
+                            <label for="gender" class="form-label">Select Gender</label>
+                            <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+                        
+                            <select name="gender" id="gender" class="form-control">
+                                <option value="1" <%= profile.gender == 1 ? 'selected' : '' %>>Male</option>
+                                <option value="2" <%= profile.gender == 2 ? 'selected' : '' %>>Female</option>
+                                <option value="3" <%= profile.gender == 3 ? 'selected' : '' %>>Others</option>
+                            </select>
+                        
+                            <img src="../assets/images/arrow-down.png" alt="" class="ico_last position-absolute">
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group mb-3 position-relative mobile_number_code">
+                            <label for="bio" class="form-label">Phone Number</label>
+                            <span class="codes"> +91 <i class="ph-bold ph-caret-down"></i></span>
+                            <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="15" id="phone" name="phone" placeholder="Enter Number" value="<%-profile.phone%>">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group  mb-3 position-relative your bio">
+                            <label for="bio" class="form-label">Enter your Bio</label>
+                            <textarea id="bio" class="form-control p-3"  name="bio" rows="3" placeholder="General Details"><%-profile.bio%></textarea>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                        <div class="form-group mb-3 position-relative search">
+                            <label for="categories" class="form-label">What are you selling?</label>
+                            <img src="./../assets/images/ss.png" alt="" class="ico_last position-absolute">
+                            <input type="Search..." class="form-control px-3 pe-5" id="" placeholder="search">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="categories mb-4">
+                            <div class="category d-flex align-items-center gap-1">Snacks <i class="ph-fill ph-x-circle fs-4"></i></div>
+                            <div class="category d-flex align-items-center gap-1">Coffee <i class="ph-fill ph-x-circle fs-4"></i></div>
+                        </div>
+                    </div> -->
+
+                    <div class="col-md-6 mt-4">
+                        <div class="d-flex page_footer">
+                            <button type="submit" class="btn_theme rounded-pill fs_20 text-white border-0 d-flex justify-content-between px-5 align-items-center">
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- profile end -->
+
+
+<!-- payment statrt -->
+<div id="payment" class="tab-content col-md-9  right_borders h-100 py-5" style="display:none;">
+    <div class="left_padding ">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h5 class="fs_20 fw-bold text-black mb-5">Add Stripe Account</h5>
+            </div>
+            <!-- <div class="col-md-6 mb-3">
+                <div class="paymentCard position-relative d-flex justify-content-between align-items-center rounded-4 p-4">
+                    <div class="d-flex flex-column" data-coreui-toggle="modal" data-coreui-target="#payment_cards">
+                        <h5 class="mb-2">Master card</h5>
+                        <span class="card-number"> <img src="./../assets/images/payment.png" alt="" class=""> *** *** **** 436</span>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href=""> <img src="../assets/images/pencil.png" alt=""></a>
+                        <a href=""> <img src="../assets/images/white_trash.png" alt=""></a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="col-md-6 mb-3">
+                <div class="paymentCard position-relative d-flex justify-content-between align-items-center rounded-4 p-4">
+                    <div class="d-flex flex-column">
+                        <h5 class="mb-2">Master card</h5>
+                        <span class="card-number"> <img src="./../assets/images/payment.png" alt="" class=""> *** *** **** 436</span>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href=""> <img src="../assets/images/pencil.png" alt=""></a>
+                        <a href=""> <img src="../assets/images/white_trash.png" alt=""></a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="w-100"></div> -->
+
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-4 mx-auto">
+                <a href="<%-accountLink.url%>" target="_blank" class="btn_theme btn_empty w-100 rounded-pill fs_16 ps-4 pe-2 d-flex position-relative justify-content-center text-center align-items-center">
+                    <img src="../assets/images/plus.png" alt="Profile Image" class="left_plus">Click Here
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!-- payment end -->
+
+<div id="password" class="tab-content col-md-9  right_borders h-100 py-5" style="display:none;">
+    <div class="">
+
+        <form id="validate1" action="/change_password" method="POST" class="mb-2 rounded-5 profile_form" enctype="multipart/form-data">
+            <h5 class="fs_20 fw-bold text-black mb-5">Change Password</h5>
+                   
+            <div class="mx-auto">
+                <div class="row">
+                   
+                    <div class="form-group mb-3 position-relative">
+                        <label for="bio" class="form-label">Old Password</label>
+                        <img src="./../assets/images/key.png" alt="" class="ico_front position-absolute">
+                        <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Old Password">
+                        <img src="./../assets/images/eye.png" alt=""   class="ico_last position-absolute">
+                    </div>
+                    <div class="form-group mb-3 position-relative">
+                        <label for="bio" class="form-label">New Password</label>
+                        <img src="./../assets/images/key.png" alt="" class="ico_front position-absolute">
+                        <input type="password" class="form-control" id="new_password" name="new_password" placeholder="New Password">
+                        <img src="./../assets/images/eye.png" alt=""   class="ico_last position-absolute">
+                    </div>
+                    <div class="form-group mb-3 position-relative">
+                        <label for="bio" class="form-label">Confirm Password</label>
+                        <img src="./../assets/images/key.png" alt="" class="ico_front position-absolute">
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                        <img src="./../assets/images/eye.png" alt="" class="ico_last position-absolute">
+                    </div>
+                    <div class="col-md-6 mt-4">
+                     
+                        <div class="d-flex page_footer">
+                            <button type="submit" class="btn_theme rounded-pill fs_20 text-white border-0 d-flex justify-content-between px-5 align-items-center">
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script>
+    function openTab(tabName) {
+    // Hide all tab contents
+    var tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(function(tab) {
+        tab.style.display = 'none';
+    });
+
+    // Remove active class from all links
+    var links = document.querySelectorAll('.product_account a');
+    links.forEach(function(link) {
+        link.classList.remove('active');
+    });
+
+    // Show the clicked tab's content
+    document.getElementById(tabName).style.display = 'block';
+
+    // Add active class to the clicked link
+    var activeLink = document.querySelector('a[href="javascript:void(0);"][onclick="openTab(\'' + tabName + '\')"]');
+    if (activeLink) {
+        activeLink.classList.add('active');
+    }
+}
+
+// Initialize default tab (Profile)
+openTab('profile');
+
+</script>
+<script>
+    function loadFile(event) {
+      const profilePreview = document.getElementById('profilePreview'); // Match the ID correctly
+      profilePreview.src = URL.createObjectURL(event.target.files[0]);
+    }
+  
+    // Trigger the file input when the plus icon is clicked
+    document.getElementById('plus_icon').addEventListener('click', function() {
+      document.getElementById('image').click();
+    });
+  </script>
+    <script>
+        $(document).ready(function () {
+          // alert("vikas")
+          $("#validate1").validate({
+            rules: {
+              old_password: {
+                required: true,
+                minlength: 6 // For length of lastname
+              },
+              new_password: {
+                required: true,
+                minlength: 6
+              },
+              confirm_password: {
+                required: true,
+                minlength: 6,
+                // For checking both passwords are same or not
+                equalTo: "#new_password"
+              },
+            }, messages: {
+
+              old_password: {
+                required: " Please enter a old password",
+               
+              },
+              new_password: {
+                required: " Please enter a password",
+                minlength:
+                  " Your password must be consist of at least 6 characters"
+              },
+              confirm_password: {
+                required: " Please enter a password",
+                minlength:
+                  " Your password must be consist of at least 6 characters",
+                equalTo: " Please enter the same password as above"
+              },
+            }
+          });
+        });  
+      </script>

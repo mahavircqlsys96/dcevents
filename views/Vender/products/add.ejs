@@ -1,0 +1,131 @@
+
+<section class="bg_blue p-3 blue_back">
+  <div class="bg-white rounded-3 up_main">
+ 
+    <section class="content_Area">
+      <div class="container bg-white rounded-4 h-100">
+        <div class="row h-100">
+
+          <div class="col-md-6 left_borders h-100">
+            <form id="validate" action="/product_add_save" method="POST" class="mb-2 rounded-5  py-4" enctype="multipart/form-data">
+              <h5 class="mb-4 upload fs_26">Add Product</h5>
+              <div class="mx-auto">
+                <div class=" ">
+                  <div class="form-group mb-3 position-relative">
+                    <label for="categories" class="form-label">Product Title</label>
+           
+                    <input type="text" class="form-control" name="title"maxlength="50" id="title" placeholder="Title">
+                  </div>
+                  <div class="form-group mb-3 position-relative">
+                    <label for="categories" class="form-label">Select Product Cateogry</label>
+                    <img src="../assets/images/arrow-down.png" alt="" class="ico_last position-absolute">
+
+                    <select name="category_id" id="category_id" class="form-control">
+                      <option value=""> Select</option>
+                      <% get_categories.forEach(function(category) { %>
+                      <option value="<%= category.id %>"><%= category.title %></option>
+                      <% }); %>
+                    </select>
+                  </div>
+
+                  <div class="form-group  mb-3 position-relative your description">
+                    <label for="description" class="form-label">Product Description</label>
+                    <textarea id="description" name="description" maxlength="255" class="form-control" rows="3" placeholder="Add Title"></textarea>
+                  </div>
+
+                  <div class="form-group mb-3 position-relative doller_sign">
+                    <label for="price" class="form-label">Price In Euro</label>
+                    <img src="../assets/images/E.png" alt="" class="ico_front position-absolute">
+                    <input type="text" class="form-control" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" id="price" name="price" placeholder="Enter price">
+                  </div>
+
+                </div>
+              </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="add_images mb-2 rounded-5 upload_images py-4">
+              <h3 class="fs-6 fw-bold text-black d-flex justify-content-between">Add Images <span> 1/1</span></h3>
+
+              <fieldset class="upload_dropZone text-center mb-3 p-4">
+                <legend class="visually-hidden">Image uploader</legend>
+                <img src="../assets/images/gallery.png" alt="" class="">
+                <p class="small my-2 text-black w-75 mx-auto fw-semibold fs_18 my-4">Product Images ,
+                   use below button to upload </p>
+                <input id="image" data-post-name="image_background" name="image" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" type="file" accept="image/jpeg, image/png, image/svg+xml" />
+                <label style="padding: 13px 50px;" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill" for="image">Upload</label>
+                <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="back">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <button type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+                    Add Product
+                    <i class="ph-bold ph-caret-right"></i>
+                </button>
+            </div>
+        </div>
+        
+      </section>
+      </form>
+
+    </section>
+
+  </div>
+</section>
+
+
+<script>
+  $(document).ready(function() {
+    $("#validate").validate({
+      rules: {
+        title: {
+          required: true,
+          minlength: 2
+        },
+        price: {
+          required: true,
+      
+        },
+        description: {
+          required: true,
+      
+        },
+        category_id: {
+          required: true
+        },
+        image: {
+          required: true,
+          accept: "image/*" // Accepts only image files
+        }
+      },
+      messages: {
+        title: {
+          required: "Please enter sub-category",
+          minlength: "Your sub-category must consist of at least 2 characters"
+        },
+        description: {
+          required: "Please enter description",
+          minlength: "Your description must consist of at least 2 characters"
+        },
+        price: {
+          required: "Please enter price",
+        
+        },
+        category_id: {
+          required: "Please select a category"
+        },
+        image_background: {
+          required: "Please upload an image",
+          accept: "Only image files are allowed (png, jpg, jpeg, gif, bmp)"
+        }
+      }
+    });
+  });
+
+  
+</script>

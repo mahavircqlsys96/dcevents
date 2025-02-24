@@ -1,0 +1,149 @@
+<%-include('../../Admin/partials/head')%>
+<style>
+  input {
+    width: 100%;
+  }
+</style>
+<section class="login_bg py-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class=" w-100 d-flex justify-content-center">
+          <form id="adminLogin" action="" method="POST" class="card  w-75 form_style py-5 rounded-5" enctype="multipart/form-data">
+            <div class="login_forms w-100 " style="padding-left:50px; padding-right: 50px;">
+              <div class=" ">
+                <div class="text-center">
+                  <img src="./../assets/images/logo.png" alt="" style="width:120px">
+                  <h2 class="text-center card-title text-dark mt-3 fw-bold fs_24">Admin Login</h2>
+                  <p class="fs_14 mb-4 opacity-50">Enter the following Details</p>
+                </div>
+                <div class="form-group mb-3 position-relative ">
+                  <img src="./../assets/images/profile.png" alt="" class="ico_front position-absolute">
+                  <input type="text" class="form-control " id="user_name" name="user_name" placeholder="Username">
+                </div>
+                <div class="form-group mb-3 position-relative">
+                  <img src="./../assets/images/key.png" alt="" class="ico_front position-absolute">
+                  <input type="password" class="form-control pe-5" id="password" name="password" placeholder="Password" required minlength="5">
+                  <i id="togglePassword" class="fa fa-eye position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;"></i>
+                </div>
+              </div>
+              <div class="">
+                <button type="submit" class="btn_theme w-100 rounded-pill fs_20 text-white border-0 d-flex justify-content-between ps-4 pe-2 align-items-center"> Login <i class="ph-light ph-caret-right fs_30"></i></button>
+
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="login_headings text-white text-center">
+          <h2 class="mb-5 fs_50 text-uppercase" style="font-weight: 900;">
+            <span>G</span>row
+            <span>Y</span>our <br>
+            <span>B</span>usiness
+            <span>w</span>ith
+            <span>U</span>S
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $('#adminLogin').validate({
+      ignore: [],
+      rules: {
+
+        user_name: {
+          required: true,
+          minlength: 6,
+          maxlength: 50
+        },
+        password: {
+          required: true,
+        },
+      },
+      messages: {
+
+        user_name: {
+          required: 'Please enter your user name.'
+        },
+        password: {
+          required: 'Please enter your password.',
+
+        },
+      },
+    });
+  })
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<% if(messages.success){ %>
+<script>
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "slideDown",
+    "hideMethod": "slideUp"
+  }
+  toastr.success('<%= messages.success%>')
+</script>
+<% } %>
+
+<% if(messages.error){ %>
+<script>
+  toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "3000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "slideDown",
+    "hideMethod": "slideUp"
+  }
+  toastr.error('<%= messages.error%>')
+</script>
+<% } %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function() {
+      // Toggle the type attribute
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+
+      // Toggle the eye icon
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+  });
+</script>

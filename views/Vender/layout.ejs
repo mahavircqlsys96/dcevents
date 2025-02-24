@@ -1,0 +1,63 @@
+<%-include('../Vender/partials/head')%>
+<%-include('../Vender/partials/navbar')%>
+
+<main id="main">
+  <!-- right_contant -->
+  <%-body%>
+  <!-- \ right_contant -->
+  <%-include('../Vender/partials/footer')%>
+</main>
+
+<%-include('../Vender/partials/script')%>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<% if(messages.success){ %>
+  <script>
+  
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": true,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "3000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "slideDown",
+      "hideMethod": "slideUp"
+    }
+    toastr.success('<%= messages.success%>')
+  </script>
+  <% } %>
+
+
+
+    <% if(messages.error){ %>
+      <script>
+ 
+        toastr.options = {
+          "closeButton": true,
+          "debug": false,
+          "newestOnTop": true,
+          "progressBar": true,
+          "positionClass": "toast-top-right",
+          "preventDuplicates": false,
+          "onclick": null,
+          "showDuration": "300",
+          "hideDuration": "1000",
+          "timeOut": "3000",
+          "extendedTimeOut": "1000",
+          "showEasing": "swing",
+          "hideEasing": "linear",
+          "showMethod": "slideDown",
+          "hideMethod": "slideUp"
+        }
+        toastr.error('<%= messages.error%>')
+      </script>
+      <% } %>
+</body>

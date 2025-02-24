@@ -1,0 +1,65 @@
+<section class="content_Area">
+    <div class="container bg-white rounded-4 p-5">
+      <!-- Event Title and Description -->
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h1 class="fs-2 fw-bold mb-3"><%= event_data.title %></h1>
+          <p class="fs-5 text-muted"><%= event_data.description %></p>
+        </div>
+      </div>
+  
+      <!-- Event Type, Date, Time, and Location -->
+      <div class="row mb-5">
+        <div class="col-md-6">
+          <p><strong>Event Type:</strong> <%= event_data.event_type == '1' ? 'Select 1' : 'Select 2' %></p>
+          <p><strong>Date:</strong> <%= moment(event_data.date).format('MMMM Do, YYYY') %></p>
+          <p><strong>Time:</strong> <%= moment(event_data.time, 'HH:mm').format('h:mm A') %></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Location:</strong> <%= event_data.address %></p>
+          <p><strong>Phone:</strong> <%= event_data.phone %></p>
+        </div>
+      </div>
+  
+      <!-- Event Images Carousel -->
+      <div class="row mb-5">
+        <div class="col-md-12">
+          <div id="eventImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% event_data.event_images.forEach((image, index) => { %>
+                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                  <img src="<%= image.image %>" class="d-block w-100 rounded" alt="Event Image <%= index + 1 %>">
+                </div>
+              <% }) %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#eventImagesCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#eventImagesCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Ticket Information -->
+      <div class="row mb-4">
+        <div class="col-md-12">
+          <h3 class="fs-4 fw-bold mb-3">Tickets</h3>
+          <ul class="list-group">
+            <% event_data.ticket_data.forEach(ticket => { %>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><%= ticket.type == '0' ? 'Normal Ticket' : ticket.type == '1' ? 'VIP Ticket' : 'VVIP Ticket' %></span>
+                <span><strong>Quantity:</strong> <%= ticket.no_of_tickets %> | <strong>Amount:</strong> $<%= ticket.amount %></span>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script src="https://cdn.jsdelivr.net/npm/moment/min/moment.min.js"></script>
+  

@@ -1,0 +1,68 @@
+
+<section class="bg_blue p-3 blue_back">
+  <div class="bg-white rounded-3 up_main">
+    <div class="row h-50">
+      <div class="col-md left_borders h-100">
+        <section class="content_Area">
+          <div class="container bg-white rounded-4 h-100">
+            <div class="row align-items-center h-100">
+              <div class="col-md-12 h-100">
+                <div class="p-4">
+                  <h5 class="mb-4 fs_18">Edit Event Category</h5>
+                  <form id="validate" action="/event_categories_update" method="POST" class="mb-2 rounded-5 signup_form py-4" enctype="multipart/form-data">
+                    <div class="form-group mb-3 position-relative">
+                      <label for="title">Event Category</label>
+                      <input type="text" class="form-control" id="title" maxlength="50" name="title" placeholder="Enter First Name" value="<%=eventcateview.title%>">
+                    </div>
+                      <input type="hidden" class="form-control" id="id"  name="id"   value="<%=eventcateview.id%>">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <section class="back">
+      <div class="container-fluid d-flex justify-content-center align-items-center">
+        <div class="text-center">
+          <a href="/event_categories_list" type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+            <i class="ph-bold ph-caret-left"></i> Back
+          </a>
+        </div>&nbsp
+        <div class="text-center">
+          <button type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+            Add Event Category <i class="ph-bold ph-caret-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+    </form>
+  </div>
+
+</section>
+<script>
+  function loadFile(event) {
+    const profilePreview = document.getElementById('profileImage');
+    profilePreview.src = URL.createObjectURL(event.target.files[0]);
+  }
+</script>
+<script>
+  $(document).ready(function() {
+    $("#validate").validate({
+      rules: {
+
+        title: {
+          required: true,
+          minlength: 3
+        },
+
+      },
+      messages: {
+        title: {
+          required: "Please enter event category",
+        },
+      }
+    });
+  });
+</script>

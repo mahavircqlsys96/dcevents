@@ -1,0 +1,474 @@
+<section class="content_Area py-5">
+  <div class="container-fluid bg-white rounded-4 h-100">
+    <div class="row align-items-center mb-4">
+      <div class="col-md-12">
+        <h5 class="fs_26 fw-bold text-black mb-3 mb-md-0 d-flex align-items-center gap-3">
+          <a href="/events_list" class="text-black">
+              <i class="ph ph-arrow-left fs_22 fs_30"></i>
+          </a>
+          Event Details
+      </h5>
+      
+      </div>
+    </div>
+    <div class="border p-4 rounded-4">
+      <div class="row">
+        <div class="col md-12 rounded-4 p-3 back_blue">
+          <p class="m-0 bg-white d-inline rounded-2 fs_14 p-1 d-inline-flex align-items-center gap-2" style="color:#EB4D4D;"> <i class="ph-fill ph-clock fs-5"></i> 1:30:40 </p>
+          <h1 class="fs_22 text-white dotted-line m-0 py-3"><%-event_data.title%></h1>
+          <h4 class="fs_16 text-white d-flex justify-content-between mt-3 m-0"> Date &amp; Time <span><%-event_data.utc_date_time%></span></h4>
+        </div>
+      </div>
+      <!-- <div class="row align-items-end">
+                <div class="col-md-3">
+                    <div class="form-group position-relative">
+                        <label for="bio" class="form-label fs_14 pt-3">Menu Title Display to the user</label>
+                        <input type="text" class="form-control fs_18 p-3" id="" placeholder="Name" value="Drinks And Menu">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <span class="text_theme fw-bold ms-3 fs_20 position-relative mt-3 mt-md-0 d-inline-flex" style="top: -10px;">Update</span>
+                </div>
+            </div> -->
+      <div class="row mt-3">
+        <div class="col-md-10">
+          <h1 class="listed fs_18 fw-bold">Product Listed</h1>
+        </div>
+        <div class="col-md-2">
+          <div class="d-flex justify-content-md-end gap-4 align-items-center mb-3 mb-md-3">
+            <a href data-coreui-toggle="modal" data-coreui-target="#add_product" class="btn_theme btn_empty rounded-pill fs_16 ps-4 pe-2  d-flex position-relative justify-content-center text-center align-items-center">
+              <img src="../../assets/images/plus.png" alt="Profile Image" class="left_plus"> Add Product </a>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <% if (event_data.eventProductList.length === 0) { %>
+        <div class="col-12 text-center">
+          <p class="text-muted">No products added to this event</p>
+        </div>
+        <% } else { %>
+        <% event_data.eventProductList.forEach(function(data) { %>
+        <div class="box col-12 col-sm-6 col-md-2 mb-3 position-relative">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#delete_detail_<%= data.id %>" class="text-danger me-2">
+            <i class="bi bi-trash-fill"></i>
+          </a>
+          <div class="modal fade" id="delete_detail_<%= data.id %>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-body text-center p-4">
+                  <i class="bi bi-trash-fill" style="font-size: 3rem; color: #dc3545;"></i>
+                  <h5 class="my-3">Delete Event Product</h5>
+                  <p>Are you sure you want to delete this event product?</p>
+                  <button class="btn btn-danger" onclick="deleteEvent('<%= data.id %>')">Yes</button>
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Image with fallback if null -->
+          <img src="<%= data.productName && data.productName.image ? data.productName.image : '../../assets/images/default_product.png' %>" style="height: 200px; width: 80px;" class="w-100">
+
+          <p class="box-text fs_14 text_theme py-2 m-0 fw-semibold mt-2">
+            <%- data.productName && data.productName.catName.title ? data.productName.catName.title : 'Unknown Category' %>
+          </p>
+          <p class="fs_18 fw-bold mb-1">
+            <%- data.productName && data.productName.title ? data.productName.title : 'Unnamed Product' %>
+          </p>
+          <p class="fs_14 mb-1">
+            £<%- data.productName && data.productName.price ? data.productName.price : '0.00' %>
+          </p>
+        </div>
+        <% }); %>
+        <% } %>
+      </div>
+
+
+    </div>
+
+
+
+    <div class="border p-4 rounded-4">
+      <div class="row">
+        <div class="col md-12 rounded-4 p-3 back_blue">
+
+          <h1 class="fs_22 text-white dotted-line m-0 py-3">Event Managers</h1>
+
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-10">
+          <h1 class="listed fs_18 fw-bold">Manager List</h1>
+        </div>
+        <div class="col-md-2">
+          <div class="d-flex justify-content-md-end gap-4 align-items-center mb-3 mb-md-3">
+            <a href data-coreui-toggle="modal" data-coreui-target="#add_manager" class="btn_theme btn_empty rounded-pill fs_16 ps-4 pe-2  d-flex position-relative justify-content-center text-center align-items-center">
+              <img src="../../assets/images/plus.png" alt="Profile Image" class="left_plus"> Add Managers </a>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <% if (event_data.eventManagerList.length === 0) { %>
+        <div class="col-12 text-center">
+          <p class="text-muted">No products added to this event</p>
+        </div>
+        <% } else { %>
+        <% event_data.eventManagerList.forEach(function(data) { %>
+        <div class="box col-12 col-sm-6 col-md-2 mb-3 position-relative">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#delete_detail_m<%= data.id %>" class="text-danger me-2">
+            <i class="bi bi-trash-fill"></i>
+          </a>
+          <div class="modal fade" id="delete_detail_m<%= data.id %>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-body text-center p-4">
+                  <i class="bi bi-trash-fill" style="font-size: 3rem; color: #dc3545;"></i>
+                  <h5 class="my-3">Delete Event Manager</h5>
+                  <p>Are you sure you want to delete this event manager?</p>
+                  <button class="btn btn-danger" onclick="deleteManager('<%= data.id %>')">Yes</button>
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Image with fallback if null -->
+          <img src="<%= data.managerName && data.managerName.image ? data.managerName.image : '../../assets/images/default_product.png' %>" style="height: 200px; width: 80px;" class="w-100">
+
+          <p class="box-text fs_14 text_theme py-2 m-0 fw-semibold mt-2">
+            <%- data.managerName && data.managerName.email ? data.managerName.email : 'N/A' %>
+          </p>
+          <p class="fs_18 fw-bold mb-1">
+            <%- data.managerName && data.managerName.first_name ? data.managerName.first_name : 'N/A' %> <%- data.managerName && data.managerName.last_name ? data.managerName.last_name : '' %>
+          </p>
+
+        </div>
+        <% }); %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- add products Modal -->
+<div class="modal fade right_modal" id="add_product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-right">
+    <div class="modal-content h-100 animate-slide p-4">
+      <div class="modal-header border-0 d-flex flex-column text-start align-items-start gap-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Products to the event</h5>
+        <div class="form-group mb-3 position-relative search w-100">
+          <label for="categories" class="form-label">Product list</label>
+          <img src="./../assets/images/ss.png" alt="" class="ico_last position-absolute">
+          <input type="search" class="form-control" id="searchInput" placeholder="search...">
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="hegiht_450">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="table-light fs_20">
+                    <tr>
+                      <th scope="col">
+                        <label>
+                          <input class="m-3" type="checkbox" id="selectAll">
+                        </label>
+                        <span class="sortable" data-sort="id">Product Id</span>
+                      </th>
+                      <th scope="col">
+                        <span class="sortable" data-sort="name">Name</span>
+                      </th>
+                      <th scope="col">
+                        <span class="sortable" data-sort="price">Price</span>
+                      </th>
+                        <th scope="col">
+                          <span class="sortable" data-sort="price">Quantity</span>
+                        </th>
+                    </tr>
+                  </thead>
+                  <tbody id="productTableBody">
+                    <% productList.forEach(function(product) { %>
+                    <tr>
+                      <td scope="row">
+                        <label>
+                          <input class="product-checkbox" type="checkbox" value="<%-product.id%>">
+                        </label><%-product.id%>
+                      </td>
+                      <td><img src="<%-product.image%>" style="height: 30px; width: 30px;" alt=""><%-product.title%></td>
+                      <td><%-product.price%></td>
+                      <td>
+                         <input type="number" id="qty" name="qty" class="form-control" placeholder="Enter quantity" min="1" required>
+                      </td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer d-flex flex-column border-0">
+        <button id="saveButton" class="btn_theme rounded-pill fs_18 text-white border-0 d-flex px-4 align-items-center w-100 justify-content-around"> Save </button>
+        <button type="button" data-coreui-dismiss="modal" class="w-100 bg-transparent text-black fw-semibold fs_18 border-0">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- manager Modal -->
+<!-- add managers Modal -->
+<div class="modal fade right_modal" id="add_manager" tabindex="-1" aria-labelledby="addManagerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-right">
+    <div class="modal-content h-100 animate-slide p-4">
+      <div class="modal-header border-0 d-flex flex-column text-start align-items-start gap-3">
+        <h5 class="modal-title" id="addManagerModalLabel">Add Manager to the Event</h5>
+        <div class="form-group mb-3 position-relative search w-100">
+          <label for="managerSearch" class="form-label">Manager List</label>
+          <img src="./../assets/images/search_icon.png" alt="" class="ico_last position-absolute">
+          <input type="search" class="form-control" id="managerSearch" placeholder="Search managers...">
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="height_450">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class="table-light fs_20">
+                    <tr>
+                      <th scope="col">
+                        <label>
+                          <input class="m-3" type="checkbox" id="selectAllManagers">
+                        </label>
+                        <span class="sortable" data-sort="id">Manager ID</span>
+                      </th>
+                      <th scope="col">
+                        <span class="sortable" data-sort="name">Name</span>
+                      </th>
+                      <th scope="col">
+                        <span class="sortable" data-sort="email">Email</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody id="managerTableBody">
+                    <% managersList.forEach(function(manager) { %>
+                    <tr>
+                      <td>
+                        <label>
+                          <input class="manager-checkbox" type="checkbox" value="<%-manager.id%>">
+                        </label><%-manager.id%>
+                      </td>
+                      <td> <img src="<%-manager.image%>" style="height: 30px; width: 30px;" alt=""> <%-manager.first_name%> <%-manager.last_name%></td>
+                      <td><%-manager.email%></td>
+                    </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer d-flex flex-column border-0">
+        <button id="saveManagersButton" class="btn_theme rounded-pill fs_18 text-white border-0 d-flex px-4 align-items-center w-100 justify-content-around"> Save </button>
+        <button type="button" data-coreui-dismiss="modal" class="w-100 bg-transparent text-black fw-semibold fs_18 border-0">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    // Search Functionality
+    $('#searchInput').on('input', function() {
+      let searchValue = $(this).val().toLowerCase();
+      $('#productTableBody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+      });
+    });
+
+    // Sorting Functionality
+    $('.sortable').on('click', function() {
+      let sortBy = $(this).data('sort');
+      let rows = $('#productTableBody tr').get();
+      rows.sort(function(a, b) {
+        let A = $(a).find('td').eq(sortBy === 'price' ? 2 : sortBy === 'name' ? 1 : 0).text().toUpperCase();
+        let B = $(b).find('td').eq(sortBy === 'price' ? 2 : sortBy === 'name' ? 1 : 0).text().toUpperCase();
+        if (A < B) {
+          return -1;
+        }
+        if (A > B) {
+          return 1;
+        }
+        return 0;
+      });
+      $.each(rows, function(index, row) {
+        $('#productTableBody').append(row);
+      });
+    });
+
+    // Select All Checkboxes
+    $('#selectAll').on('click', function() {
+      $('.product-checkbox').prop('checked', this.checked); // Select or Deselect all checkboxes
+    });
+
+    // Deselect "Select All" if any checkbox is unchecked manually
+    $('.product-checkbox').on('click', function() {
+      if (!$(this).prop('checked')) {
+        $('#selectAll').prop('checked', false); // Uncheck "Select All" if one checkbox is unchecked
+      }
+      // Check if all checkboxes are selected, if so, check "Select All"
+      if ($('.product-checkbox:checked').length === $('.product-checkbox').length) {
+        $('#selectAll').prop('checked', true);
+      }
+    });
+
+    $('#saveButton').on('click', function() {
+
+      let selectedProducts = [];
+      let eventId = `<%-event_data.id%>`
+      let productsQty=[]
+    
+    
+
+      $('.product-checkbox:checked').each(function() {
+      const row = $(this).closest('tr'); // Get the row of the selected checkbox
+      const qty = row.find('input[name="qty"]').val(); // Get the quantity input in the same row
+  
+      selectedProducts.push($(this).val());
+      productsQty.push(qty);
+      });
+  
+
+      $.ajax({
+        url: '/save_selected_products',
+        method: 'POST',
+        data: {
+          productIds: selectedProducts,
+          event_id: eventId,
+          productsQty:productsQty
+        },
+        success: function(response) {
+
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+
+          alert('Error saving products: ' + error);
+        }
+      });
+    });
+  });
+
+
+  function deleteEvent(hash_id) {
+
+    $.ajax({
+      url: '/product_deleted/' + hash_id,
+      method: 'DELETE',
+
+      success: function(response) {
+        if (response.message === "Product deleted successfully") {
+  
+          location.reload();
+        } else {
+          alert('Failed to delete the event.');
+        }
+      },
+
+      error: function() {
+        alert('Error deleting the event.');
+      }
+    });
+  }
+</script>
+
+
+<script>
+  $(document).ready(function() {
+    // Search Functionality for Managers
+    $('#managerSearch').on('input', function() {
+      let searchValue = $(this).val().toLowerCase();
+      $('#managerTableBody tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1);
+      });
+    });
+
+    // Sorting Managers
+    $('.sortable').on('click', function() {
+      let sortBy = $(this).data('sort');
+      let rows = $('#managerTableBody tr').get();
+      rows.sort(function(a, b) {
+        let A = $(a).find('td').eq(sortBy === 'email' ? 2 : sortBy === 'name' ? 1 : 0).text().toUpperCase();
+        let B = $(b).find('td').eq(sortBy === 'email' ? 2 : sortBy === 'name' ? 1 : 0).text().toUpperCase();
+        return A.localeCompare(B);
+      });
+      $.each(rows, function(index, row) {
+        $('#managerTableBody').append(row);
+      });
+    });
+
+    // Select All Checkboxes for Managers
+    $('#selectAllManagers').on('click', function() {
+      $('.manager-checkbox').prop('checked', this.checked);
+    });
+
+    // Deselect "Select All" if any checkbox is unchecked manually
+    $('.manager-checkbox').on('click', function() {
+      if (!$(this).prop('checked')) {
+        $('#selectAllManagers').prop('checked', false);
+      }
+      if ($('.manager-checkbox:checked').length === $('.manager-checkbox').length) {
+        $('#selectAllManagers').prop('checked', true);
+      }
+    });
+
+    // Save Selected Managers
+    $('#saveManagersButton').on('click', function() {
+      let selectedManagers = [];
+      let eventId = `<%- event_data.id %>`;
+
+      $('.manager-checkbox:checked').each(function() {
+        selectedManagers.push($(this).val());
+      });
+
+      $.ajax({
+        url: '/save_selected_managers',
+        method: 'POST',
+        data: {
+          managerIds: selectedManagers,
+          event_id: eventId
+        },
+        success: function(response) {
+          location.reload(); // Reload the page to reflect changes
+        },
+        error: function(xhr, status, error) {
+          alert('Error saving managers: ' + error);
+        }
+      });
+    });
+  });
+
+  // Delete Manager Function
+  function deleteManager(hash_id) {
+    $.ajax({
+      url: '/manager_deleted/' + hash_id,
+      method: 'DELETE',
+      success: function(response) {
+        if (response.message === "Manager deleted successfully") {
+   
+          location.reload();
+        } else {
+          alert('Failed to delete the manager.');
+        }
+      },
+      error: function() {
+        alert('Error deleting the manager.');
+      }
+    });
+  }
+</script>

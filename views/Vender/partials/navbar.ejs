@@ -1,0 +1,88 @@
+<nav class="navbar navbar-expand-lg navbar_dashboard">
+    <div class="container-fluid bg-white">
+      <a href=" "> <img src="../../assets/images/logo.png" alt="Logo" class="logo_m">
+      </a>
+      <button class="navbar-toggler" type="button" data-coreui-toggle="collapse" data-coreui-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 margin_left">
+          <li class="nav-item">
+            <a class="nav-link <%= title === 'dashboard' ? 'active text_theme fw-bold' : '' %>" aria-current="page" href="/dashboard">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs_16 <%= title === 'manage_events' ? 'active' : '' %>" href="/events_list">Manage Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs_16 <%= title === 'Manager' ? 'active' : '' %>" href="/manager_list">Manage Event Managers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs_16 <%= title === 'Events' ? 'active' : '' %>" href="/events_list">Events Listed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs_16 <%= title === 'Products' ? 'active' : '' %>" href="/product_list">Products Listed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fs_16 <%= title === 'profile' ? 'active' : '' %>" href="/profile">Settings</a>
+          </li>
+        </ul>
+        
+        <ul class="right_profile ms-auto d-flex align-items-center gap-4 navbar-nav">
+          <li class="nav-item">
+            <img src="../../assets/images/nav.png" alt="Profile Image" class="nav-img" id="nav-img">
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw_bold" href="#"><%- session.name %></a>
+          </li>
+          <li class="nav-item">
+            <img src="<%- session.image %>" alt="Profile Image" class="nav-img" id="nav-img" style="width: 50px; height: 50px;">
+          </li>
+          <li class="nav-item position-relative">
+            <img src="../../assets/images/bottom.png" alt="Arrow Image" class="bottom-img" id="bottom-img" style="cursor: pointer;" onclick="toggleLogout()">
+            
+            <!-- Logout button (hidden by default) -->
+            <div id="logoutButton" class="logout-btn" style="display: none;">
+              <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
+  <style>
+    .logout-btn {
+    position: absolute;
+    top: 100%; /* Below the nav item */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.logout-btn a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #dc3545;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: block;
+    text-align: center;
+}
+
+  </style>
+  <script>
+    function toggleLogout() {
+    const logoutButton = document.getElementById('logoutButton');
+    
+    // Toggle visibility of the logout button
+    if (logoutButton.style.display === 'none') {
+        logoutButton.style.display = 'block';
+    } else {
+        logoutButton.style.display = 'none';
+    }
+}
+
+  </script>

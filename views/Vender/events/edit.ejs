@@ -1,0 +1,140 @@
+<section class="content_Area">
+  <div class="container bg-white rounded-4 h-100">
+    <div class="row h-100">
+      <div class="col-md-8 left_borders h-100">
+        <!-- Form with pre-filled values -->
+        <form action="/events_edit_save" method="POST" class="mb-2 rounded-5 signup_form py-4" enctype="multipart/form-data">
+          <h5 class="mb-4 upload fs_26">Edit Event</h5>
+          <div class="mx-auto">
+            <div class="form-group mb-3 position-relative">
+              <label for="title" class="form-label">Event Title</label>
+              <input type="text" hidden name="event_id" id="event_id" value="<%= event_data.id %>">
+              <input type="text" name="title" id="title" class="form-control" value="<%= event_data.title %>" placeholder="Title">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="event_type" class="form-label">Event Type</label>
+              <img src="../assets/images/arrow-down.png" alt="" class="ico_last position-absolute">
+              <!-- <select name="event_type" id="event_type" class="form-control">
+                <option value="0">Select</option>
+                <option value="1" <%= event_data.event_type == 1 ? 'selected' : '' %>>Select 1</option>
+                <option value="2" <%= event_data.event_type == 2 ? 'selected' : '' %>>Select 2</option>
+              </select> -->
+              <select name="event_category_id" id="event_category_id" class="form-control">
+                <option value="">Select</option>
+                <% get_events_categories.forEach(function(category) { %>
+                  <option value="<%= category.id %>" 
+                    <%= event_data.event_category_id == category.id ? 'selected' : '' %>>
+                    <%= category.title %>
+                  </option>
+                <% }); %>
+              </select>
+              
+            </div>
+            <!-- event_category_id -->
+
+            <div class="form-group mb-3 position-relative">
+              <label for="date" class="form-label">Select date</label>
+              <input type="date" class="form-control" id="date" name="date" value="<%= event_data.date %>" placeholder="Select">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="time" class="form-label">Select Time</label>
+              <input type="time" name="time" class="form-control" id="time" value="<%= event_data.time %>" placeholder="Select">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="description" class="form-label">Event Description</label>
+              <textarea id="description" name="description" class="form-control" style="height: 100px;" placeholder="Add Description"><%= event_data.description %></textarea>
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <label for="title" class="form-label">Restaurants</label>
+          
+              <input type="text" name="venue_name" id="venue_name" class="form-control" value="<%= event_data.venue_name %>" placeholder="Restaurants">
+            </div>
+            
+            <!-- <div class="form-group mb-3 position-relative" data-coreui-toggle="modal" data-coreui-target="#location_Set">
+              <label for="address" class="form-label">Address</label>
+              <img src="../assets/images/location.png" alt="" class="ico_front position-absolute">
+              <input type="text" class="form-control ps-5" id="address" name="address" value="<%= event_data.address %>" placeholder="Enter address ...">
+              <input type="hidden" id="latitude" name="latitude" value="<%= event_data.latitude %>">
+              <input type="hidden" id="longitude" name="longitude" value="<%= event_data.longitude %>">
+              <i class="ph-light ph-caret-right fs_30 ico_last position-absolute"></i>
+            </div> -->
+
+            <div class="form-group mb-3 position-relative">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="15" id="phone" name="phone" value="<%= event_data.phone %>" placeholder="Enter Number">
+            </div>
+
+            <div class="form-group mb-3 position-relative">
+              <section class="ticket-section">
+                <div class="container bg-white rounded-4">
+                  <h5 class="mb-4 ">Tickets</h5>
+                  <div class="row">
+                    <table class="table col-md-6 form-group mb-3 position-relative">
+                      <thead>
+                        <tr>
+                          <th>Ticket Type</th>
+                          <th>No. of Tickets</th>
+                          <th>Amount per Ticket (in $)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>General</td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="3" class="form-control" name="general" value="<%= event_data.ticket_data[0].no_of_tickets %>" placeholder="No. of Tickets" /></td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" class="form-control" name="general_amount" value="<%= event_data.ticket_data[0].amount %>" placeholder="Amount" /></td>
+                        </tr>
+                        <tr>
+                          <td>VIP</td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="3" class="form-control" name="vip" value="<%= event_data.ticket_data[1].no_of_tickets %>" placeholder="No. of Tickets" /></td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11" class="form-control" name="vip_amount" value="<%= event_data.ticket_data[1].amount %>" placeholder="Amount" /></td>
+                        </tr>
+                        <tr>
+                          <td>VVIP</td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="3"  class="form-control" name="vvip" value="<%= event_data.ticket_data[2].no_of_tickets %>" placeholder="No. of Tickets" /></td>
+                          <td><input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="11"  class="form-control" name="vvip_amount" value="<%= event_data.ticket_data[2].amount %>" placeholder="Amount" /></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+          </div>
+          <br>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group mb-3">
+          <h3 class="fs-6 fw-bold text-black d-flex justify-content-between">Edit Images <span> 1/5</span></h3>
+          <br>
+          <fieldset class="upload_dropZone text-center mb-3 p-4">
+            <legend class="visually-hidden">Image uploader</legend>
+            <img src="../assets/images/gallery.png" alt="">
+            <p class="small my-2 text-black w-75 mx-auto fw-semibold fs_18 my-4">Drag and drop Product Images here or use below button to upload</p>
+            <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" name="image" type="file" multiple accept="image/jpeg, image/png, image/svg+xml" onchange="validateFileLimit(this)" />
+            <label style="padding: 13px 50px;" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill" for="upload_image_background">Upload</label>
+            <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+          </fieldset>
+        </div>
+      </div>
+
+      <section class="back">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+          <div class="text-center">
+            <button type="submit" class="btn btn-upload mb-3 btn_theme border-0 rounded-pill">
+              Save Changes
+              <i class="ph-bold ph-caret-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+      </form>
+      <!-- End of the form -->
+    </div>
+  </div>
+  </div>
+</section>

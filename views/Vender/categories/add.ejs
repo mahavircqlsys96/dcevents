@@ -1,0 +1,65 @@
+<div class="right_contant">
+  <div class="page_head">
+      <button type="button" class="back_btn" onclick="goback()"><i class="fa-solid fa-arrow-left"></i></button>
+      <h2 class="page_title">Add Category</h2>
+  </div>
+  <div class="shadow_box card_height">
+      <div class="dark_card">
+          <form id="validate" action="/categories_save" method="POST" enctype="multipart/form-data">
+              <div class="row">
+                   <div class="col-12">
+                      <div class="up_img mb-5">
+                          <img src="../../assets/images/pro1.jpg"  id="output2" alt="">
+                          <label for="file1">
+                              <i class="ph ph-camera"></i>
+                          </label>
+                      </div>
+                      <input type="file"  accept=".png,.jpg,.jpeg,.gif,.bmp" name="image" class="visually-hidden" name="" onchange="loadFile(event,'output2')" id="file1">
+                  </div>
+                  <div class="col-md-6">
+                      <label for="" class="form_label">Category</label>
+                      <div class="inputgroup">
+                          <input type="text" name="title" id="title" class="inputcontrol" maxlength="50" placeholder="Loram" value="">
+                      </div>
+                  </div> 
+                
+              <!-- \ row -->
+              <div class="row">
+                  
+                  <div class="col-12 pt-4">
+                      <button class="theme_btn" style="max-width: 16.875rem;" type="submit">Add</button>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+      $("#validate").validate({
+        rules: {
+            title: {
+                required: true,
+                minlength: 2
+            },
+            image: {
+                required: true,
+                accept: "image/*"  // Accepts only image files
+            }
+        },
+        messages: {
+            title: {
+                required: "Please enter category",
+                minlength: "Your category must consist of at least 2 characters"
+            },
+            image: {
+                required: "Please upload an image",
+                accept: "Only image files are allowed (png, jpg, jpeg, gif, bmp)"
+            }
+        }
+      });
+    });
+</script>
+
+  

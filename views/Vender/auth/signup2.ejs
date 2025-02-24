@@ -1,0 +1,185 @@
+<%-include('../../Vender/partials/head')%>
+<section class="bg_blue p-3 blue_back">
+  <div class="bg-white rounded-3 up_main">
+
+    <section class="top_setps p-4">
+      <div class="container-fluid bg-white">
+        <div class="row">
+          <div class="col-md-12 d-flex justify-content-between align-items-center position-relative">
+            <a href=" "> <img src="../assets/images/logo.png" alt="Logo" class="logo_m">
+            </a>
+            <div class="progress-container d-flex align-items-center">
+              <div class="progress-step active me-2 "></div>
+              <div class="progress-step  me-2"></div>
+              <div class="progress-step me-2"></div>
+              <div class="progress-step"></div>
+            </div>
+            <a  href="/sign_up3?id=<%= find_date.hash_id %>" class="skip text-decoration-none fs_18 text_theme">Skip for now</a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="content_Area">
+      <div class="container bg-white rounded-4 h-100">
+        <div class="row align-items-center h-100">
+          <div class="col-md-6 text-center shop fs_24">
+            <h2><%-find_date.user_name%></h2>
+            <div class="almost fs_18">
+              <p>You are almost there! </p>
+              <img src="../assets/images/shop.png" alt="Vendor Illustration" class="img-fluid">
+              <div class="setup fs_24">
+                <p>We need more information to<br> setup your Vendor Account</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 right_borders h-100">
+            <div class="p-4">
+              <h5 class="mb-4 fs_18">We Need Following Details</h5>
+
+              <form id="validate" id="phoneForm" action="/sign_up2_save" method="POST" class="mb-2 rounded-5 signup_form py-4" enctype="multipart/form-data">
+               
+                <!-- <div class="profile-upload mb-4">
+                  <img src="../assets/images/profile1.png" alt="Profile Image" class="rounded-circle">
+                  <div class="up_plus " id="plus_icon">
+                    <input type="file" accept="image/*" name="image" id="image" onchange="loadFile(event,'profilePreview')" >
+                    <img src="../assets/images/plus.png" id="profilePreview" alt="Profile Image" class="">
+                  </div>
+                </div> -->
+
+
+                <div class="profile-upload mb-4">
+                  <img src="../assets/images/profile1.png" alt="Profile Image" class="rounded-circle" id="profileImage" style="width: 100px; height: 100px;">
+                  <div class="up_plus" id="plus_icon">
+                    <label for="image" class="cursor-pointer">
+                      <img src="../assets/images/plus.png" alt="Upload Icon" class="plus-icon">
+                    </label>
+                    <input type="file" accept="image/*" name="image" id="image" style="display: none;" onchange="loadFile(event)">
+                  </div>
+                </div>
+                <h5 class="mb-4 upload fs_18">Upload Profile Image</h5>
+                <div class="mx-auto">
+                  <div class=" ">
+                    <!-- <div class="form-group mb-3 position-relative mobile_number_code">
+                      <label for="bio">Phone Number</label>
+                      <span class="codes"> +91 <i class="ph-bold ph-caret-down"></i></span>
+                      <input type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" id="phone" maxlength="15" name="phone" placeholder="Enter Number">
+                      <input type="text" id="id" hidden class="form-control" id="id" name="id" value="<%-find_date.hash_id%>">
+                    </div> -->
+
+                    <div class="form-group mb-3 position-relative mobile_number_code">
+                      <label for="phone">Phone Number:</label>
+                      <input type="hidden" id="countrycode" name="country_code">
+                      <input type="tel" class="form-control" id="phone" name="phoneNo" maxlength="15" placeholder="Enter Phone Number">
+                      <label id="exampleInputName2-error" class="error" for="exampleInputName2"></label>
+                    </div>
+
+                    <div class="form-group  mb-3 position-relative your bio">
+                      <label for="bio">Enter your Bio</label>
+                      <textarea id="bio" class="form-control" name="bio" rows="3" placeholder="General Details"></textarea>
+                    </div>
+                    <!-- <div class="form-group mb-3 position-relative search">
+                      <label for="categories" class="form-label">What are you selling?</label>
+                      <img src="./../assets/images/ss.png" alt="" class="ico_last position-absolute">
+                      <input type="search..." class="form-control" id="product_id" name="product_id" placeholder="search...">
+                    </div>
+                    <div class="categories">
+                      <div class="category d-flex align-items-center gap-1">Snacks <i class="ph-fill ph-x-circle fs-4"></i></div>
+                      <div class="category d-flex align-items-center gap-1">Coffee <i class="ph-fill ph-x-circle fs-4"></i></div>
+                    </div> -->
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="back">
+        <div class="container-fluid">
+          <div class="d-flex justify-content-between page_footer">
+            <a href="/sign_up1?id=<%-find_date.hash_id%>" class="fs_20 d-flex align-items-center gap-2 fw-bold "> <i class="ph-bold ph-caret-left"></i> Back </a>
+            <button type="submit" class="fs_20 d-flex align-items-center gap-2 active_next text_theme fw-bold" style="border: 0; background-color: transparent;">
+              Next <i class="ph-bold ph-caret-right"></i>
+            </button>
+
+          </div>
+        </div>
+      </section>
+      </form>
+    </section>
+    <script>
+      function loadFile(event) {
+        const profilePreview = document.getElementById('profileImage');
+        profilePreview.src = URL.createObjectURL(event.target.files[0]);
+      }
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        $("#validate").validate({
+          rules: {
+            phone: {
+              required: true,
+              minlength: 2
+            },
+            bio: {
+              required: true
+            },
+            image: {
+              required: true,
+              accept: "image/*"
+            }
+          },
+          messages: {
+            phone: {
+              required: "Please enter phone",
+              minlength: "Your phone must consist of at least 10 digits"
+            },
+            bio: {
+              required: "Please enter bio"
+            },
+            image: {
+              required: "Please upload an image",
+              accept: "Only image files are allowed (png, jpg, jpeg, gif, bmp)"
+            }
+          }
+        });
+      });
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script>
+      const phoneInput = document.querySelector("#phone");
+      const countryCodeInput = document.querySelector("#countrycode");
+
+      // Initialize intl-tel-input
+      const iti = window.intlTelInput(phoneInput, {
+        initialCountry: "auto",
+        geoIpLookup: function(callback) {
+          fetch("https://ipinfo.io?token=YOUR_TOKEN_HERE") // Optional for auto-detecting country
+            .then((resp) => resp.json())
+            .then((data) => callback(data.country))
+            .catch(() => callback("us"));
+        },
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      });
+
+      // Update country code whenever the phone input changes
+      phoneInput.addEventListener('input', () => {
+        countryCodeInput.value = iti.getSelectedCountryData().dialCode;
+        console.log("Country Code:", countryCodeInput.value);
+        console.log("Phone Number:", phoneInput.value);
+      });
+
+      // Alternatively, listen to country change (e.g., when the user selects a different country)
+      phoneInput.addEventListener('countrychange', () => {
+        countryCodeInput.value = iti.getSelectedCountryData().dialCode;
+        console.log("Country Code (on country change):", countryCodeInput.value);
+      });
+
+      document.querySelector("#phoneForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // Prevent form submission
+        console.log("Form submitted - Country Code:", countryCodeInput.value);
+        console.log("Form submitted - Phone Number:", phoneInput.value);
+      });
+    </script>
